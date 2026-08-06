@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Grid to Orbit: Space Data Centers and Economy at Scale — Sept 24–25, 2026, University of Michigan</title>
+<meta name="description" content="A one-day workshop at the University of Michigan bringing together industry, government, and academia on building data centers and computing infrastructure in orbit. September 24–25, 2026, Ann Arbor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#00274C;
+  --navy-deep:#0A1220;
+  --maize:#FFCB05;
+  --bg:#F7F8FA;
+  --ink:#22303C;
+  --slate:#5C6B7A;
+  --line:#DDE3EA;
+  --card:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16.5px;line-height:1.65}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;color:var(--navy);line-height:1.2}
+a{color:var(--navy)}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+/* ---------- Nav ---------- */
+nav{position:sticky;top:0;z-index:50;background:var(--navy);border-bottom:3px solid var(--maize)}
+.nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;flex-wrap:wrap;padding:0 16px}
+.brand{font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;font-size:1.02rem;padding:14px 12px 14px 0;letter-spacing:.01em;white-space:nowrap}
+.brand .dot{color:var(--maize)}
+.tabs{display:flex;flex-wrap:wrap;margin-left:auto}
+.tab-btn{background:none;border:none;color:#C6D2DE;font-family:'IBM Plex Sans',sans-serif;font-size:.92rem;font-weight:500;padding:16px 13px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-3px;transition:color .15s;display:inline-flex;align-items:center;gap:6px}
+.tab-ico{width:16px;height:16px;flex-shrink:0;opacity:.85}
+.tab-btn:hover{color:#fff}
+.tab-btn[aria-selected="true"]{color:var(--maize);border-bottom-color:var(--maize)}
+.tab-btn:focus-visible{outline:2px solid var(--maize);outline-offset:-2px}
+
+/* ---------- Hero ---------- */
+header.hero{background:var(--navy-deep);color:#EAF0F6;position:relative;overflow:hidden}
+.hero-inner{max-width:1080px;margin:0 auto;padding:26px 20px 30px;position:relative;z-index:2}
+.hero .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--maize);margin-bottom:8px}
+.hero h1{color:#fff;font-size:clamp(1.4rem,3vw,2.1rem);max-width:34ch;margin-bottom:10px}
+.hero .sub{max-width:66ch;color:#B9C6D4;font-size:.98rem;margin-bottom:14px}
+.hero .meta{font-family:'IBM Plex Mono',monospace;font-size:.92rem;color:#EAF0F6}
+.hero .meta span{color:var(--maize)}
+.hero-cta{display:inline-block;margin-top:14px;background:var(--maize);color:var(--navy);font-family:'Space Grotesk',sans-serif;font-weight:700;text-decoration:none;padding:10px 20px;border-radius:4px;font-size:.94rem}
+.hero-cta:hover{background:#FFD84D}
+.orbit-art{position:absolute;right:-40px;top:0;height:100%;width:52%;z-index:1;opacity:.9;pointer-events:none}
+@media(max-width:820px){.orbit-art{opacity:.28;width:100%;right:0}}
+
+/* ---------- Layout ---------- */
+main{max-width:1080px;margin:0 auto;padding:44px 20px 80px}
+.panel{display:none}
+.panel.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.panel.active{animation:none}}
+.panel h2{font-size:1.7rem;margin-bottom:8px}
+.panel h3{font-size:1.15rem;margin:34px 0 12px}
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);margin-bottom:6px}
+.panel p{margin-bottom:14px;max-width:76ch}
+.lede{font-size:1.08rem}
+ul.plain{list-style:none;margin:0 0 16px}
+ul.plain li{padding:9px 0 9px 22px;position:relative;border-bottom:1px solid var(--line);max-width:80ch}
+ul.plain li::before{content:"";position:absolute;left:2px;top:18px;width:8px;height:8px;background:var(--maize);border:1.5px solid var(--navy);border-radius:50%}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 20px}
+.card .role{font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-bottom:4px}
+.card .name{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--navy);font-size:1.05rem}
+.card .name a{color:var(--navy);text-decoration:none;border-bottom:2px solid var(--maize)}
+.card .name a:hover{color:#003B73}
+.card .aff{font-size:.92rem;color:var(--slate);margin-top:3px;line-height:1.5}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--navy);color:var(--maize);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:2.5px solid var(--maize);overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+.callout{background:#FFF8DC;border:1px solid #EAD87E;border-left:4px solid var(--maize);border-radius:6px;padding:14px 18px;margin:18px 0;max-width:80ch}
+.section-divider{height:1px;background:var(--line);margin:36px 0;max-width:80ch}
+.callout strong{color:var(--navy)}
+
+/* ---------- Agenda ---------- */
+.block-label{background:var(--navy);color:var(--maize);font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.04em;padding:12px 18px;border-radius:8px 8px 0 0;margin-top:30px;font-size:1rem}
+.sched{border:1px solid var(--line);border-top:none;border-radius:0 0 8px 8px;overflow:hidden;background:var(--card)}
+.slot{display:grid;grid-template-columns:170px 1fr;border-bottom:1px solid var(--line)}
+.slot:last-child{border-bottom:none}
+.slot:nth-child(even){background:#F3F6F9}
+.slot .time{font-family:'IBM Plex Mono',monospace;font-size:.84rem;color:var(--navy);font-weight:500;padding:15px 14px 15px 18px;border-right:1px solid var(--line)}
+.slot .what{padding:15px 20px}
+.slot .what .title{font-weight:600;color:var(--navy)}
+.slot .what .who{font-size:.94rem;margin-top:3px}
+.slot .what .who b{color:var(--ink)}
+.slot .what .fmt{font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--slate);margin-top:4px}
+.slot .what .disc{font-size:.92rem;color:var(--slate);font-style:italic;margin-top:6px;line-height:1.55}
+@media(max-width:640px){.slot{grid-template-columns:1fr}.slot .time{border-right:none;border-bottom:1px dashed var(--line);padding-bottom:8px}}
+
+/* ---------- Tables ---------- */
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:14px 0 20px}
+th{background:var(--navy);color:var(--maize);font-family:'Space Grotesk',sans-serif;text-align:left;padding:12px 16px;font-size:.95rem}
+td{padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.95rem}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:#F3F6F9}
+
+.btn{display:inline-block;background:var(--navy);color:#fff;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-weight:700;padding:12px 24px;border-radius:4px;margin:6px 0 14px}
+.btn:hover{background:#003B73}
+.btn.gold{background:var(--maize);color:var(--navy)}
+.btn.gold:hover{background:#FFD84D}
+
+footer{background:var(--navy);color:#B9C6D4;margin-top:20px}
+.foot-inner{max-width:1080px;margin:0 auto;padding:34px 20px;font-size:.9rem}
+.foot-inner b{color:#fff}
+.foot-inner .mono{color:var(--maize);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<nav aria-label="Site">
+  <div class="nav-inner">
+    <div class="brand">Grid<span class="dot">→</span>Orbit <span style="font-weight:400;color:#8FA3B8">| UM 2026</span></div>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn" role="tab" aria-selected="true" data-tab="about"><svg class="tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1" stroke-linecap="round"/></svg>Overview</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="speakers"><svg class="tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8.5" cy="8" r="3"/><circle cx="16" cy="9" r="2.4"/><path d="M3 20c0-3.3 2.5-6 5.5-6s5.5 2.7 5.5 6M14.5 20c0-2.6 1.9-4.7 4.2-5" stroke-linecap="round"/></svg>Participants</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="agenda"><svg class="tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="5" width="17" height="15" rx="1.8"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5" stroke-linecap="round"/></svg>Agenda</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="registration"><svg class="tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="4" width="14" height="17" rx="1.6"/><path d="M9 3.5h6a1 1 0 0 1 1 1V6H8V4.5a1 1 0 0 1 1-1Z"/><path d="M8.5 12.5l2 2 4.5-4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Registration</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="venue"><svg class="tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Venue &amp; Accommodation</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="posters"><svg class="tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3.5" width="16" height="17" rx="1.6"/><circle cx="9" cy="9" r="1.7"/><path d="m5 16 4.2-4.2a1.5 1.5 0 0 1 2.1 0L15 15.5M14 14l1.4-1.4a1.5 1.5 0 0 1 2.1 0L19 14.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Poster Submission</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="committee"><svg class="tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20v-1.5A4.5 4.5 0 0 1 8.5 14h1A4.5 4.5 0 0 1 14 18.5V20M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM16 14.2a3.3 3.3 0 1 0-1.2-6.4M16.8 14.3c1.9.4 3.2 1.9 3.2 4.2V20" stroke-linecap="round"/></svg>Organizing Committee</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg class="orbit-art" viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- ground grid -->
+    <g stroke="#1E3A5C" stroke-width="1">
+      <path d="M40 400 L560 400"/><path d="M80 380 L520 380"/><path d="M120 360 L480 360"/>
+      <path d="M100 400 L140 340"/><path d="M200 400 L220 340"/><path d="M300 400 L300 340"/><path d="M400 400 L380 340"/><path d="M500 400 L460 340"/>
+    </g>
+    <!-- transmission pylons -->
+    <g stroke="#2C4E75" stroke-width="1.5" fill="none">
+      <path d="M150 400 L150 345 M138 358 L162 358 M141 372 L159 372"/>
+      <path d="M330 400 L330 350 M319 361 L341 361 M322 374 L338 374"/>
+    </g>
+    <!-- trajectory arc (uplink) -->
+    <path d="M150 345 C 240 180, 350 120, 440 95" stroke="#FFCB05" stroke-width="2" fill="none" stroke-dasharray="5 7"/>
+    <!-- faint orbit ring behind the node network -->
+    <ellipse cx="490" cy="105" rx="115" ry="72" stroke="#3D6089" stroke-width="1.2" fill="none" transform="rotate(-16 490 105)"/>
+    <!-- mesh links between orbital nodes -->
+    <g stroke="#5B84AE" stroke-width="1.1" fill="none" opacity="0.85">
+      <path d="M440 95 L515 62"/>
+      <path d="M515 62 L530 140"/>
+      <path d="M440 95 L530 140"/>
+    </g>
+    <!-- orbital node A (primary) -->
+    <g transform="translate(440 95)">
+      <rect x="-14" y="-9" width="28" height="18" rx="2" fill="#0A1220" stroke="#FFCB05" stroke-width="1.6"/>
+      <rect x="-34" y="-6" width="16" height="12" fill="#16406B" stroke="#5B84AE" stroke-width="1"/>
+      <rect x="18" y="-6" width="16" height="12" fill="#16406B" stroke="#5B84AE" stroke-width="1"/>
+      <circle r="2.4" fill="#FFCB05"/>
+    </g>
+    <!-- orbital node B -->
+    <g transform="translate(515 62)">
+      <rect x="-10" y="-6.5" width="20" height="13" rx="1.6" fill="#0A1220" stroke="#8FA9C9" stroke-width="1.3"/>
+      <rect x="-24" y="-4.5" width="12" height="9" fill="#16406B" stroke="#5B84AE" stroke-width="0.8"/>
+      <rect x="12" y="-4.5" width="12" height="9" fill="#16406B" stroke="#5B84AE" stroke-width="0.8"/>
+      <circle r="1.8" fill="#5EE0A0"/>
+    </g>
+    <!-- orbital node C -->
+    <g transform="translate(530 140)">
+      <rect x="-10" y="-6.5" width="20" height="13" rx="1.6" fill="#0A1220" stroke="#8FA9C9" stroke-width="1.3"/>
+      <rect x="-24" y="-4.5" width="12" height="9" fill="#16406B" stroke="#5B84AE" stroke-width="0.8"/>
+      <rect x="12" y="-4.5" width="12" height="9" fill="#16406B" stroke="#5B84AE" stroke-width="0.8"/>
+      <circle r="1.8" fill="#5EE0A0"/>
+    </g>
+    <!-- stars -->
+    <g fill="#5B84AE">
+      <circle cx="90" cy="70" r="1.4"/><circle cx="200" cy="40" r="1.1"/><circle cx="320" cy="90" r="1.3"/>
+      <circle cx="420" cy="30" r="1.1"/><circle cx="560" cy="190" r="1.2"/><circle cx="260" cy="150" r="1"/>
+    </g>
+  </svg>
+  <div class="hero-inner">
+    <div class="eyebrow">Workshop · University of Michigan</div>
+    <h1>From Grid to Orbit: Space Data Centers and Economy at Scale</h1>
+    <p class="sub">A workshop on building data centers in space — infrastructure, technology, logistics, and policies — connecting industry, government, and academia.</p>
+    <div class="meta"><span>Thu–Fri, September 24–25, 2026</span> · Ann Arbor, Michigan<br><span style="color:#B9C6D4">Day 1: 8:30 AM – 5:30 PM · Day 2: 9:00 AM – 12:00 PM</span></div>
+    <a class="hero-cta" href="https://forms.gle/RJjwN7yLJ1fzWJW5A" target="_blank" rel="noopener">Register — it's free</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="panel active" role="tabpanel">
+  <div class="kicker">Overview</div>
+  <h2>Data centers in orbit: infrastructure, operations, and policy</h2>
+  <p class="lede">This workshop brings together participants from industry, government, and academia to explore both research frontiers and practical challenges in building data centers and computing infrastructure in orbital environments.</p>
+  <p>As data center expansion on Earth places growing demands on existing power grids and water systems, computing in orbit is emerging as a bold complement to terrestrial infrastructure. Our goal is to identify emerging issues and possible collaborations toward building large-scale space data centers — and to define how each sector can contribute to this integrated effort, from earth-to-orbit supply chains to in-space assembly, operations, and policy.</p>
+
+  <h3>Workshop topics</h3>
+  <ul class="plain">
+    <li>In-space computing architectures and data-center infrastructure</li>
+    <li>In-space manufacturing, assembly, and deployment</li>
+    <li>Launch logistics, operations, and supply chain management — including earth-to-orbit supply chains connecting launch activities to "last-mile" logistics for in-space data center assembly</li>
+    <li>Business models, investment, and economic viability</li>
+    <li>Regulatory and policy landscape</li>
+    <li>Environmental impact and sustainability — including terrestrial data center demands on power grids and water systems, and how the energy sector can benefit from in-space data centers</li>
+    <li>AI and data workloads for orbital platforms</li>
+    <li>Resilience, security, and fault tolerance</li>
+    <li>In-space autonomous systems, human-robot interaction and teaming</li>
+  </ul>
+
+  
+
+  <h3>Sponsors</h3>
+  <p>College of Engineering, Office of the Associate Dean for Research (ADR) · Michigan Institute for Computational Discovery and Engineering (MICDE) · Department of Industrial and Operations Engineering (IOE) · Department of Civil and Environmental Engineering (CEE) · Electrical &amp; Computer Engineering (ECE) · Computer Science &amp; Engineering (CSE) · Aerospace Engineering (AERO) · Department of Climate and Space Sciences and Engineering (CLaSP) · Ross School of Business, Technology and Operations · Office of the Vice President for Research (OVPR), Bold Challenge Program</p>
+</section>
+
+<section id="speakers" class="panel" role="tabpanel">
+  <div class="kicker">Participants</div>
+  <h2>Who you'll hear from</h2>
+  <p class="lede">All speakers and panelists are listed alphabetically by last name.</p>
+  <h3>Speakers</h3>
+  <div class="grid2">
+    <div class="pcard"><div class="avatar">NB</div><div><div class="name"><a href="https://eecs.engin.umich.edu/people/bleier-nathaniel/" target="_blank" rel="noopener">Nathaniel Bleier</a></div><div class="aff">Assistant Professor, Computer Science & Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">CG</div><div><div class="name"><a href="https://aop.eecs.umich.edu/people.html" target="_blank" rel="noopener">Chris Giebink</a></div><div class="aff">Professor, Electrical Engineering and Computer Science, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">KH</div><div><div class="name"><a href="https://ae.gatech.edu/directory/person/koki-ho" target="_blank" rel="noopener">Koki Ho</a></div><div class="aff">Dutton-Ducoffe Professor & Associate Professor, Daniel Guggenheim School of Aerospace Engineering, Georgia Tech</div></div></div>
+    <div class="pcard"><div class="avatar">BJ</div><div><div class="name"><a href="https://aero.engin.umich.edu/people/jorns-benjamin/" target="_blank" rel="noopener">Benjamin Jorns</a></div><div class="aff">Professor, Aerospace Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">CL</div><div><div class="name"><a href="https://www.linkedin.com/in/cara-leckey-ph-d-20286512/" target="_blank" rel="noopener">Cara Leckey, Ph.D.</a></div><div class="aff">Center Chief Technologist, Office of the Director, NASA Langley Research Center</div></div></div>
+    <div class="pcard"><div class="avatar">DL</div><div><div class="name"><a href="https://eecs.engin.umich.edu/people/liang-di/" target="_blank" rel="noopener">Di Liang</a></div><div class="aff">Professor, Electrical Engineering and Computer Science, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">TL</div><div><div class="name"><a href="https://engineering.nd.edu/faculty/tengfei-luo/" target="_blank" rel="noopener">Tengfei Luo</a></div><div class="aff">Professor, Aerospace and Mechanical Engineering, University of Notre Dame</div></div></div>
+    <div class="pcard"><div class="avatar">ZM</div><div><div class="name"><a href="https://mi.engin.umich.edu/" target="_blank" rel="noopener">Zetian Mi</a></div><div class="aff">Pallab K. Bhattacharya Collegiate Professor of Engineering; Professor, Electrical Engineering and Computer Science, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">SS</div><div><div class="name"><a href="https://ioe.engin.umich.edu/people/shen-siqian/" target="_blank" rel="noopener">Siqian Shen</a></div><div class="aff">Professor, Industrial and Operations Engineering & Civil and Environmental Engineering; Associate Director, MICDE, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">LS</div><div><div class="name"><a href="https://ioe.engin.umich.edu/people/stirling-leia/" target="_blank" rel="noopener">Leia Stirling</a></div><div class="aff">Professor, Director of Center for Ergonomics, Industrial and Operations Engineering & Robotics, University of Michigan</div></div></div>
+  </div>
+  <h3>Panelists (tentative)</h3>
+  <div class="grid2">
+    <div class="pcard"><div class="avatar">LB</div><div><div class="name"><a href="https://www.linkedin.com/in/linkan-bian-3a1190a/" target="_blank" rel="noopener">Linkan Bian</a></div><div class="aff">Professor & Department Head, School of Industrial Engineering and Management, Oklahoma State University</div></div></div>
+    <div class="pcard"><div class="avatar">KD</div><div><div class="name"><a href="https://www.linkedin.com/in/kdontchev" target="_blank" rel="noopener">Kiko Dontchev</a></div><div class="aff">VP of Launch, SpaceX</div></div></div>
+    <div class="pcard"><div class="avatar">KD</div><div><div class="name"><a href="https://aero.engin.umich.edu/people/duraisamy-karthik/" target="_blank" rel="noopener">Karthik Duraisamy</a></div><div class="aff">Arthur B. Modine Professor of Engineering; Samir and Puja Kaul Director of MICDE, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">MF</div><div><div class="name"><a href="https://www.linkedin.com/in/michael-fletcher-68819411/" target="_blank" rel="noopener">Michael Fletcher</a></div><div class="aff">President, MJF Consulting, LLC</div></div></div>
+    <div class="pcard"><div class="avatar">JL</div><div><div class="name"><a href="https://www.ime.psu.edu/department/directory-detail-g.aspx?q=jul572" target="_blank" rel="noopener">Jingjing Li</a></div><div class="aff">Professor, Harold and Inge Marcus Department of Industrial and Manufacturing Engineering, Penn State University</div></div></div>
+    <div class="pcard"><div class="avatar">ML</div><div><div class="name"><a href="https://aero.engin.umich.edu/people/li-max/" target="_blank" rel="noopener">Max Li</a></div><div class="aff">Assistant Professor, Aerospace Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">DL</div><div><div class="name"><a href="https://eecs.engin.umich.edu/people/liang-di/" target="_blank" rel="noopener">Di Liang</a></div><div class="aff">Professor, Electrical Engineering and Computer Science, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">JS</div><div><div class="name"><a href="https://cee.engin.umich.edu/people/scruggs-jeff/" target="_blank" rel="noopener">Jeff Scruggs</a></div><div class="aff">Professor, Civil & Environmental Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">MS</div><div><div class="name"><a href="https://eecs.engin.umich.edu/people/shahbaz-muhammad/" target="_blank" rel="noopener">Muhammad Shahbaz</a></div><div class="aff">Assistant Professor, Computer Science & Engineering, University of Michigan</div></div></div>
+  </div>
+
+  <h3>Other Participants</h3>
+  <div class="grid2">
+    <div class="pcard"><div class="avatar">TA</div><div><div class="name"><a href="https://ners.engin.umich.edu/people/allen-todd/" target="_blank" rel="noopener">Todd Allen</a></div><div class="aff">Chihiro Kikuchi Collegiate Professor; Associate Dean for Research, College of Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">CC</div><div><div class="name"><a href="https://aero.engin.umich.edu/people/cesnik-carlos-e-s/" target="_blank" rel="noopener">Carlos E. S. Cesnik</a></div><div class="aff">Richard A. Auhll Department Chair of Aerospace Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">YF</div><div><div class="name"><a href="https://faculty.engineering.ucdavis.edu/fan/" target="_blank" rel="noopener">Yueyue Fan</a></div><div class="aff">Professor, Civil & Environmental Engineering, UC Davis</div></div></div>
+    <div class="pcard"><div class="avatar">OJ</div><div><div class="name"><a href="https://aero.engin.umich.edu/people/jia-richards-oliver/" target="_blank" rel="noopener">Oliver Jia-Richards</a></div><div class="aff">Assistant Professor, Aerospace Engineering & Climate and Space Sciences and Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">HK</div><div><div class="name"><a href="https://www.linkedin.com/in/harrison-hyung-min-kim-9015141/" target="_blank" rel="noopener">Harrison Kim</a></div><div class="aff">Program Director, National Science Foundation (NSF), ENG/CMMI; Professor, University of Illinois Urbana-Champaign</div></div></div>
+    <div class="pcard"><div class="avatar">SR</div><div><div class="name"><a href="https://erau.edu/faculty/Seetha.Raghavan" target="_blank" rel="noopener">Seetha Raghavan</a></div><div class="aff">Program Director, National Science Foundation (NSF), ENG; Professor & Associate Dean, College of Engineering, Embry-Riddle Aeronautical University</div></div></div>
+    <div class="pcard"><div class="avatar">SZ</div><div><div class="name"><a href="https://clasp.engin.umich.edu/people/zou-shasha/" target="_blank" rel="noopener">Shasha Zou</a></div><div class="aff">Professor, Climate and Space Sciences and Engineering (CLaSP), University of Michigan</div></div></div>
+  </div>
+
+</section>
+
+<!-- ================= REGISTRATION ================= -->
+<section id="registration" class="panel" role="tabpanel">
+  <div class="kicker">Registration</div>
+  <h2>Register to attend</h2>
+  <p class="lede"><strong>Registration is free but required</strong> — space is limited and catering counts are needed. Please register by <strong>Monday, September 14, 2026</strong>.</p>
+  <p>The workshop spans 1.5 days: a full program on Thursday, September 24, and a half-day of technical talks and in-depth working-group discussions on Friday morning, September 25.</p>
+  <a class="btn gold" href="https://forms.gle/RJjwN7yLJ1fzWJW5A" target="_blank" rel="noopener">Register now</a>
+  <p>Questions about registration? Contact <a href="mailto:GOspaceDC-workshop@umich.edu">GOspaceDC-workshop@umich.edu</a>.</p>
+</section>
+
+<!-- ================= VENUE ================= -->
+<section id="venue" class="panel" role="tabpanel">
+  <div class="kicker">Venue &amp; Accommodation</div>
+  <h2>Getting here &amp; where to stay</h2>
+
+  <h3>Venue</h3>
+  <p><strong>Day 1 (Thursday, September 24):</strong> Rackham Amphitheater, 4th Floor, Rackham Graduate School, University of Michigan, 915 E Washington St, Ann Arbor, MI 48109 — through the afternoon panels, then the group moves to the IOE Building on North Campus for the poster session, reception, and career fair (4:00–5:30 PM).</p>
+  <p><strong>Day 2 (Friday, September 25):</strong> IOE Commons, G690 &amp; G610, 1205 Beal Ave., Ann Arbor, MI 48109.</p>
+  <p>Please note: food and drinks are not permitted in the Rackham Amphitheater (only water is allowed); no breakfast will be served during Thursday check-in.</p>
+  <div class="section-divider"></div>
+  <h3>Hotel options — nights of September 23 &amp; 24</h3>
+  <p>Room blocks under the group name <strong>"U-M Space Data Center Workshop"</strong> have been reserved at the hotels below (the Residence Inn block is under <strong>"UM Industrial Operations Engineering Block"</strong>). Rates are per night, plus tax. Please book through the guest booking links <strong>before each block expires</strong> — the earliest deadline is August 23, 2026.</p>
+  <table>
+    <tr><th>Hotel</th><th>Nightly rate</th><th>Parking</th><th>Room block</th></tr>
+    <tr>
+      <td><b><a href="https://www.hilton.com/en/locations/usa/michigan/ann-arbor/doubletree-by-hilton/" target="_blank" rel="noopener">DoubleTree by Hilton Ann Arbor North</a></b><br>3600 Plymouth Road, Ann Arbor, MI 48105</td>
+      <td>$142 + tax</td>
+      <td>No charge</td>
+      <td>Expires <b>Sept 6, 2026</b><br><a href="https://www.hilton.com/en/attend-my-event/u-m-space-data-center-workshop/" target="_blank" rel="noopener"><b>Guest booking link →</b></a></td>
+    </tr>
+    <tr>
+      <td><b><a href="https://www.marriott.com/en-us/hotels/dtwaa-the-vanguard-ann-arbor-autograph-collection/overview/" target="_blank" rel="noopener">Vanguard Hotel</a></b><br>201 Glen Avenue, Ann Arbor, MI 48104</td>
+      <td>$269 + tax</td>
+      <td>Valet only: $40 per night</td>
+      <td>Expires <b>Sept 2, 2026</b><br><a href="https://www.marriott.com/event-reservations/reservation-link.mi?id=1783627439173&amp;key=GRP&amp;app=resvlink" target="_blank" rel="noopener"><b>Guest booking link →</b></a></td>
+    </tr>
+    <tr>
+      <td><b><a href="https://www.marriott.com/en-us/hotels/arbdt-residence-inn-ann-arbor-downtown/overview/" target="_blank" rel="noopener">Residence Inn Ann Arbor Downtown</a></b><br>120 W. Huron St., Ann Arbor, MI 48104</td>
+      <td>$180 + tax<br>(breakfast included)</td>
+      <td>Valet: $38 per night · off-site parking in nearby Ashley and Ann garage</td>
+      <td>Expires <b>Aug 23, 2026</b><br><a href="https://www.marriott.com/event-reservations/reservation-link.mi?id=1783954353535&amp;key=GRP&amp;app=resvlink" target="_blank" rel="noopener"><b>Guest booking link →</b></a></td>
+    </tr>
+  </table>
+  <p><strong>About the hotels.</strong> The <strong>DoubleTree Ann Arbor North</strong> sits on Plymouth Road closest to North Campus (roughly a mile away, a few minutes by car or bus), with free on-site parking — the most convenient and economical option if the venue is on North Campus. The <strong>Vanguard Hotel</strong>, an Autograph Collection property on Glen Avenue, is the most upscale of the three and sits right at the edge of Central Campus, steps from the Medical Campus and a short walk to downtown. The <strong>Residence Inn Ann Arbor Downtown</strong> is in the heart of downtown on Huron Street, with suite-style rooms and breakfast included, within easy walking distance of Central Campus, restaurants, and the Amtrak station.</p>
+  <div class="section-divider"></div>
+  <h3>Getting to the Rackham Amphitheater (Day 1)</h3>
+  <p>The Rackham Building is on Central Campus at 915 E. Washington St., at the corner of Washington and Fletcher; the Amphitheater is on the 4th floor. <a href="https://www.google.com/maps/search/?api=1&amp;query=Rackham+Graduate+School+915+E+Washington+St+Ann+Arbor+MI+48109" target="_blank" rel="noopener">Open in Google Maps</a> · <a href="https://rackham.umich.edu/about/rackham-building/" target="_blank" rel="noopener">Rackham Building information (rackham.umich.edu)</a>. Metered street parking and the nearby Forest and Church Street structures serve the building; U-M campus buses (Central Campus routes) and TheRide also stop within a short walk.</p>
+  <div class="section-divider"></div>
+  <h3>Getting to the IOE Building (Day 1 late afternoon &amp; Day 2)</h3>
+  <p>The Industrial and Operations Engineering Building is on North Campus at 1205 Beal Ave., Ann Arbor, MI 48109. <a href="https://www.google.com/maps/search/?api=1&amp;query=1205+Beal+Ave+Ann+Arbor+MI+48109" target="_blank" rel="noopener">Open in Google Maps</a> · <a href="https://ioe.engin.umich.edu/" target="_blank" rel="noopener">Department of Industrial &amp; Operations Engineering (ioe.engin.umich.edu)</a> · <a href="https://ioe.engin.umich.edu/about/contact-us/" target="_blank" rel="noopener">Directions &amp; contact info</a>. On Thursday, the group travels from Rackham to the IOE Building as a group (3:15–3:45 PM); no separate transportation booking is needed. Visitor parking is available in the North Campus structures near Beal Avenue, and the free U-M Blue Bus routes connect North Campus to Central Campus and downtown hotels (see below).</p>
+  <div class="section-divider"></div>
+  <h3>Getting between Central Campus and North Campus</h3>
+  <p>The University of Michigan's Central Campus (downtown Ann Arbor) and North Campus are about <strong>2 miles / 10 minutes apart by car</strong>, separated by the Huron River. The easiest connection is the <strong>free U-M campus bus system</strong>, which anyone may ride — no ID required. Blue Buses on the Commuter North and Bursley–Baits routes run every 5–10 minutes on weekdays between the Central Campus Transit Center (on North University Ave.) and North Campus stops including the Duderstadt Center and Pierpont Commons; the ride takes about 10–15 minutes. Rideshare (Uber/Lyft) between the two campuses typically costs $8–12 and takes under 10 minutes. Walking is possible but not recommended between sessions — it's a 35–45 minute uphill route via the Broadway or Fuller Road bridges. TheRide (AAATA) public buses also connect downtown with the Plymouth Road corridor near the DoubleTree.</p>
+  <div class="section-divider"></div>
+  <h3>Traveling to Ann Arbor</h3>
+  <p><strong>By air.</strong> The closest major airport is Detroit Metropolitan Airport (DTW), about 25 miles (30–40 minutes by car) from Ann Arbor, with nonstop service from most major U.S. cities and many international destinations. Ground options from DTW include rental cars, taxis and rideshare (Uber/Lyft, typically $50–70 to Ann Arbor), and the Michigan Flyer / AirRide motorcoach, which runs frequent daily departures between DTW and downtown Ann Arbor (Blake Transit Center) at roughly $15–18 one way; advance booking is recommended.</p>
+  <p><strong>By train.</strong> Amtrak's Wolverine line serves the Ann Arbor station (325 Depot St.) with several daily trains connecting Chicago, Kalamazoo, Battle Creek, Detroit, and Pontiac. The station is a 10–15 minute walk or short rideshare from Central Campus and downtown hotels.</p>
+  <p><strong>By car.</strong> Ann Arbor is reached via I-94 (east–west) and US-23 (north–south), about 45 minutes from Detroit and 4 hours from Chicago. Visitor parking is available in public structures and lots; workshop-specific parking guidance will be posted with the venue details.</p>
+  <p><strong>Getting around.</strong> Downtown Ann Arbor and Central Campus are compact and walkable. TheRide (AAATA) local buses, free U-M campus buses, and rideshare cover longer hops, including between downtown hotels and North Campus.</p>
+</section>
+
+<!-- ================= AGENDA ================= -->
+<section id="agenda" class="panel" role="tabpanel">
+  <div class="kicker">Agenda</div>
+  <h2>Thursday–Friday, September 24–25, 2026</h2>
+  <p>Day 1 (Thursday) meets in the <strong>Rackham Amphitheater, 4th Floor, Rackham Graduate School</strong> through the afternoon panels, then moves to the <strong>IOE Building</strong> on North Campus for the poster session, reception, and career fair. Day 2 (Friday morning) meets in the <strong>IOE Commons, G690/G610</strong>. All times Eastern; talks and panels are tentative and to be updated as we receive more participation confirmations.</p>
+
+  <div class="block-label">DAY 1 — THURSDAY, SEPTEMBER 24 · MORNING (Rackham Amphitheater, 4th Floor)</div>
+  <div class="sched">
+    <div class="slot"><div class="time">8:00 – 8:30 AM</div><div class="what"><div class="title">Registration & check-in</div><div class="who">Please note: food and drinks are not permitted in the auditorium; only water is allowed; no breakfast will be served.</div></div></div>
+    <div class="slot"><div class="time">8:30 – 8:40 AM</div><div class="what"><div class="title">Welcome Remarks</div><div class="who"><b>Todd Allen</b>, Chihiro Kikuchi Collegiate Professor; Associate Dean for Research, College of Engineering, University of Michigan</div></div></div>
+    <div class="slot"><div class="time">8:40 – 8:50 AM</div><div class="what"><div class="title">Workshop Vision, Goals & Logistics</div><div class="who"><b>Siqian Shen</b> (Organizing Committee Chair; Professor, IOE & CEE; Associate Director, MICDE, UMich)</div></div></div>
+    <div class="slot"><div class="time">8:50 – 9:20 AM</div><div class="what"><div class="title">Keynote: Building the Lunar Frontier</div><div class="who"><b>Cara Leckey, Ph.D.</b>, Center Chief Technologist, Office of the Director, NASA Langley Research Center</div><div class="disc">This presentation will give an overview of NASA's current plans to establish a permanent Moon base. Realization of this goal requires advancements in off-earth manufacturing, payload handling and logistics, lunar infrastructure construction and sustainment, autonomous assembly, and data handling and analysis.</div><div class="fmt">25-min talk + 5-min Q&amp;A</div></div></div>
+    <div class="slot"><div class="time">9:20 – 10:40 AM</div><div class="what"><div class="title">Technical Talk Session 1</div><div class="who">Four talks, each 15-min talk + 5-min Q&amp;A:</div><div class="who"><b>9:20</b> · Orbital Computing: Feasibility and Challenges — <b>Nathaniel Bleier</b>, Assistant Professor, Computer Science &amp; Engineering, University of Michigan<br><b>9:40</b> · From Chip to Orbit: Integrated Photonics for Space-Based Computing, Communications and Beyond — <b>Di Liang</b>, Professor, Electrical Engineering and Computer Science, University of Michigan<br><b>10:00</b> · In-Space Logistics and Its Challenges — <b>Koki Ho</b>, Dutton-Ducoffe Professor &amp; Associate Professor, Daniel Guggenheim School of Aerospace Engineering, Georgia Tech<br><b>10:20</b> · Human-Robot Teaming in Space — <b>Leia Stirling</b>, Professor, Director of Center for Ergonomics, IOE &amp; Robotics, University of Michigan</div></div></div>
+    <div class="slot"><div class="time">10:40 – 11:15 AM</div><div class="what"><div class="title">Panel 1: Building in Space — Construction, Manufacturing, Assembly & Operations</div><div class="disc">In-space manufacturing, construction, and assembly; deployment and servicing operations; autonomous systems and human-robot teaming for in-space assembly and servicing; in-space logistics and its operational challenges; earth-to-orbit supply chains</div><div class="who" style="margin-top:6px"><b>Moderator:</b> Max Li (AERO/IOE/CEE, UMich)<br><b>Panelists:</b> Kiko Dontchev (VP of Launch, SpaceX); Linkan Bian (Professor & Department Head, Oklahoma State University); Jeff Scruggs (CEE, UMich); Jingjing Li (Professor, Penn State)</div></div></div>
+    <div class="slot"><div class="time">11:15 AM – 12:45 PM</div><div class="what"><div class="title">Lunch on your own</div><div class="who">A list of nearby dining options will be provided at check-in.</div></div></div>
+  </div>
+
+  <div class="block-label">DAY 1 — THURSDAY, SEPTEMBER 24 · AFTERNOON (Rackham Amphitheater, 4th Floor), THEN IOE BUILDING</div>
+  <div class="sched">
+    <div class="slot"><div class="time">12:45 – 1:15 PM</div><div class="what"><div class="title">Keynote: Overview of the USSF Institute: Space Power and Propulsion for Agility, Responsiveness, and Resilience (SPAR)</div><div class="who"><b>Benjamin Jorns</b>, Professor, Aerospace Engineering, University of Michigan</div><div class="disc">SPAR is a five-year, $35M USSF Space Strategic Technology Institute developing advanced space power and propulsion technologies. Led by the University of Michigan with seven university partners and ten small businesses, and advised by aerospace primes and government partners, the institute advances next-generation space power and propulsion capabilities. This talk overviews SPAR's goals, organizational structure, and recent results.</div><div class="fmt">25-min talk + 5-min Q&amp;A</div></div></div>
+    <div class="slot"><div class="time">1:15 – 2:15 PM</div><div class="what"><div class="title">Technical Talk Session 2</div><div class="who">Three talks, each 15-min talk + 5-min Q&amp;A:</div><div class="who"><b>1:15</b> · Data Centers in Orbit: Thermal and Energy Feasibility from Chip to Radiator — <b>Tengfei Luo</b>, Professor, Aerospace and Mechanical Engineering, University of Notre Dame<br><b>1:35</b> · Microconcentrating photovoltaics for space power — <b>Chris Giebink</b>, Professor, Electrical Engineering and Computer Science, University of Michigan<br><b>1:55</b> · Emerging Ferroelectric Nitride Technologies for Space and Data-Center Electronics — <b>Zetian Mi</b>, Pallab K. Bhattacharya Collegiate Professor of Engineering; Professor, Electrical Engineering and Computer Science, University of Michigan</div></div></div>
+    <div class="slot"><div class="time">2:15 – 3:00 PM</div><div class="what"><div class="title">Panel 2: Computing &amp; Ecosystem in Orbit — Infrastructure, AI/Data Workloads, Energy Control</div><div class="disc">In-space computing hardware and system architectures; AI and data workloads for orbital platforms; resilience, security &amp; fault tolerance; data-center infrastructure and operations in orbit; space communications; power and energy control; thermal management.</div><div class="who" style="margin-top:6px"><b>Moderator:</b> Nathaniel Bleier (CSE, UMich)<br><b>Panelists:</b> Karthik Duraisamy (Professor, AERO; Director, MICDE, UMich); Muhammad Shahbaz (CSE, UMich); Di Liang (EECS, UMich); Michael Fletcher (President, MJF Consulting, LLC)</div></div></div>
+    <div class="slot"><div class="time">3:00 – 3:30 PM</div><div class="what"><div class="title">Government and Industry Panel: Policy, Business Models, Funding, and Collaboration</div><div class="disc">Open-floor session with interaction from participants and the audience, focused on policy design, business models, potential funding mechanism, and collaboration opportunities across academia, industry, and government.</div><div class="who" style="margin-top:6px"><b>Moderator:</b> Siqian Shen (Professor, IOE & CEE; Associate Director, MICDE, UMich)<br><b>Panelists:</b> TBD</div></div></div>
+    <div class="slot"><div class="time">3:30 – 4:00 PM</div><div class="what"><div class="title">Head to the IOE Building (North Campus)</div><div class="who">Travel from the auditorium to the Department of Industrial and Operations Engineering building; directions and transportation guidance will be provided on site.</div></div></div>
+    <div class="slot"><div class="time">4:00 – 5:30 PM</div><div class="what"><div class="title">Poster Session, Reception & Career Fair — IOE Building</div><div class="who">Student poster session; drinks & light refreshments; social networking; meeting collaborators and employers (career fair)</div><div class="who">Closing remarks — <b>Siqian Shen</b>, Workshop Organizing Committee Chair</div></div></div>
+  </div>
+
+  <div class="block-label">DAY 2 — FRIDAY, SEPTEMBER 25 · HALF DAY (9:00 AM – 12:00 PM) — IOE Commons, G690, G610</div>
+  <div class="sched">
+    <div class="slot"><div class="time">8:30 – 9:00 AM</div><div class="what"><div class="title">Check-in & light breakfast</div></div></div>
+    <div class="slot"><div class="time">9:00 – 9:10 AM</div><div class="what"><div class="title">Day 2 Opening & Framing</div><div class="who"><b>Siqian Shen</b>, Workshop Organizing Committee Chair — overview of the morning's parallel options</div></div></div>
+    <div class="slot"><div class="time">9:10 AM – 12:00 PM</div><div class="what"><div class="title">Parallel Options</div><div class="who">Attendees may choose one track or move between them over the course of the morning:</div><div class="who"><b>1) Lab Tour:</b> guided tours of North Campus space, robotics, and computing research labs<br><b>2) Meeting Employers (Career Fair):</b> informal conversations with sponsor companies and industry partners about internships and open roles<br><b>3) Meeting Collaborators:</b> open networking space for forming new research collaborations across institutions and sectors</div><div class="fmt">Facilitators/leads for each track: TBD (organizing committee members)</div><div class="fmt">Coffee and snacks will be provided.</div></div></div>
+    <div class="slot"><div class="time">12:00 PM</div><div class="what"><div class="title">Workshop Adjourns</div></div></div>
+  </div>
+</section>
+
+<!-- ================= POSTERS ================= -->
+<section id="posters" class="panel" role="tabpanel">
+  <div class="kicker">Poster Submission</div>
+  <h2>Call for student posters</h2>
+  <p class="lede">Students and postdoctoral researchers are invited to present posters during the poster session, reception, and career fair, <strong>4:00 – 5:30 PM on September 24</strong>, in the IOE Building (North Campus).</p>
+  <p>Posters may address any workshop topic: in-space computing architectures and hardware; in-space manufacturing, assembly, and deployment; launch logistics and earth-to-orbit supply chains; AI and data workloads for orbital platforms; resilience, security, and fault tolerance; autonomous systems and human-robot teaming; business models and economic viability; regulatory and policy issues; and environmental, energy, and sustainability dimensions of data centers on Earth and in space.</p>
+
+  <h3>Key dates</h3>
+  <ul class="plain">
+    <li>Poster abstract submission deadline: <strong>Monday, September 14, 2026</strong></li>
+    <li>Notification of acceptance: <strong>Friday, September 18, 2026</strong></li>
+    <li>Workshop &amp; poster session: <strong>Thursday, September 24, 2026</strong></li>
+  </ul>
+
+  <h3>Format &amp; logistics</h3>
+  <ul class="plain">
+    <li>Recommended poster size: <strong>36″ × 48″</strong> (portrait or landscape); easels and poster boards provided</li>
+    <li>Set up at the IOE Building upon arrival (around 4:00 PM); be available at your poster during the 4:00 – 5:30 PM poster session, reception, and career fair</li>
+    <li>All poster presenters must also register for the workshop (registration is free)</li>
+  </ul>
+  <a class="btn gold" href="https://forms.gle/mLVGSmjcjTejYyUT7" target="_blank" rel="noopener">Submit a poster abstract</a>
+</section>
+
+<!-- ================= COMMITTEE ================= -->
+<section id="committee" class="panel" role="tabpanel">
+  <div class="kicker">Organizing Committee</div>
+  <h2>Who's organizing</h2>
+  <div class="grid2">
+    <div class="pcard"><div class="avatar">SS</div><div><div class="role">Chair</div><div class="name"><a href="https://ioe.engin.umich.edu/people/shen-siqian/" target="_blank" rel="noopener">Siqian Shen</a></div><div class="aff">Professor, Industrial and Operations Engineering &amp; Civil and Environmental Engineering; Associate Director, MICDE, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">JL</div><div><div class="role">Co-Chair</div><div class="name"><a href="https://michiganross.umich.edu/faculty-research/faculty/jun-li" target="_blank" rel="noopener">Jun Li</a></div><div class="aff">Professor, Ross School of Business, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">ML</div><div><div class="role">Member</div><div class="name"><a href="https://aero.engin.umich.edu/people/li-max/" target="_blank" rel="noopener">Max Li</a></div><div class="aff">Assistant Professor, Aerospace Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">NB</div><div><div class="role">Member</div><div class="name"><a href="https://eecs.engin.umich.edu/people/bleier-nathaniel/" target="_blank" rel="noopener">Nathaniel Bleier</a></div><div class="aff">Assistant Professor, Computer Science and Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">XH</div><div><div class="role">Member</div><div class="name"><a href="https://uq.engin.umich.edu/" target="_blank" rel="noopener">Xun Huan</a></div><div class="aff">Associate Professor, Mechanical Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">RJ</div><div><div class="role">Member</div><div class="name"><a href="https://ioe.engin.umich.edu/people/jiang-ruiwei/" target="_blank" rel="noopener">Ruiwei Jiang</a></div><div class="aff">Associate Professor, Industrial and Operations Engineering, University of Michigan</div></div></div>
+  </div>
+  <h3>University Leadership &amp; Sponsoring Department Chairs</h3>
+  <div class="grid2">
+    <div class="pcard"><div class="avatar">TA</div><div><div class="role">Associate Dean for Research</div><div class="name"><a href="https://ners.engin.umich.edu/people/allen-todd/" target="_blank" rel="noopener">Todd Allen</a></div><div class="aff">Chihiro Kikuchi Collegiate Professor; Associate Dean for Research, College of Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">JI</div><div><div class="role">Department Chair</div><div class="name"><a href="https://ioe.engin.umich.edu/people/ivy-julie-simmons/" target="_blank" rel="noopener">Julie Ivy</a></div><div class="aff">Department Chair &amp; Vivian L. Carpenter Collegiate Professor, Industrial and Operations Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">YY</div><div><div class="role">Department Chair</div><div class="name"><a href="https://cee.engin.umich.edu/people/yin-yafeng/" target="_blank" rel="noopener">Yafeng Yin</a></div><div class="aff">Donald Malloure Department Chair of Civil and Environmental Engineering; Donald Cleveland Collegiate Professor of Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">DS</div><div><div class="role">Department Chair</div><div class="name"><a href="https://eecs.engin.umich.edu/people/sylvester-dennis/" target="_blank" rel="noopener">Dennis Sylvester</a></div><div class="aff">Peter and Evelyn Fuss Chair of Electrical and Computer Engineering; Edward S. Davidson Collegiate Professor, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">AP</div><div><div class="role">Department Chair</div><div class="name"><a href="https://eecs.engin.umich.edu/people/prakash-atul/" target="_blank" rel="noopener">Atul Prakash</a></div><div class="aff">Richard H. Orenstein Division Chair of Computer Science and Engineering; Professor, EECS, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">AS</div><div><div class="role">Department Chair</div><div class="name"><a href="https://clasp.engin.umich.edu/people/steiner-allison-l/" target="_blank" rel="noopener">Allison L. Steiner</a></div><div class="aff">Chair, Department of Climate and Space Sciences and Engineering (CLaSP), University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">CC</div><div><div class="role">Department Chair</div><div class="name"><a href="https://aero.engin.umich.edu/people/cesnik-carlos-e-s/" target="_blank" rel="noopener">Carlos E. S. Cesnik</a></div><div class="aff">Richard A. Auhll Department Chair of Aerospace Engineering, University of Michigan</div></div></div>
+    <div class="pcard"><div class="avatar">ID</div><div><div class="role">Area Chair</div><div class="name"><a href="https://michiganross.umich.edu/faculty-research/faculty/izak-duenyas" target="_blank" rel="noopener">Izak Duenyas</a></div><div class="aff">Area Chair of Technology and Operations; Herrick Professor of Business, Ross School of Business, University of Michigan</div></div></div>
+  </div>
+  <h3>Sponsors</h3>
+  <ul class="plain">
+    <li>College of Engineering, Office of the Associate Dean for Research (ADR)</li>
+    <li>Michigan Institute for Computational Discovery and Engineering (MICDE)</li>
+    <li>Department of Industrial and Operations Engineering (IOE)</li>
+    <li>Department of Civil and Environmental Engineering (CEE)</li>
+    <li>Electrical &amp; Computer Engineering (ECE)</li>
+    <li>Computer Science &amp; Engineering (CSE)</li>
+    <li>Department of Climate and Space Sciences and Engineering (CLaSP)</li>
+    <li>Aerospace Engineering (AERO)</li>
+    <li>Ross School of Business, Technology and Operations</li>
+    <li>Office of the Vice President for Research (OVPR), Bold Challenge Program</li>
+  </ul>
+  <p><strong>Contact:</strong> <a href="mailto:GOspaceDC-workshop@umich.edu">GOspaceDC-workshop@umich.edu</a></p>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="mono">From Grid to Orbit · Sept 24–25, 2026</div>
+    <p style="margin-top:8px"><b>University of Michigan, Ann Arbor</b> — Questions? Contact the organizing committee at <a href="mailto:GOspaceDC-workshop@umich.edu" style="color:var(--maize)">GOspaceDC-workshop@umich.edu</a>.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.panel');
+  function show(id, push){
+    panels.forEach(p => p.classList.toggle('active', p.id === id));
+    tabs.forEach(t => t.setAttribute('aria-selected', t.dataset.tab === id ? 'true' : 'false'));
+    if (push) history.replaceState(null, '', '#' + id);
+    window.scrollTo({top: 0, behavior: 'auto'});
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab, true)));
+  document.querySelectorAll('[data-goto]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault(); show(a.dataset.goto, true);
+  }));
+  const hash = location.hash.replace('#','');
+  if (hash && document.getElementById(hash) && document.getElementById(hash).classList.contains('panel')) show(hash, false);
+})();
+</script>
+</body>
+</html>
