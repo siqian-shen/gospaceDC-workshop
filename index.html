@@ -102,7 +102,8 @@ ul.plain li::before{content:"";position:absolute;left:2px;top:18px;width:8px;hei
 .slot .what .who b{color:var(--ink)}
 .slot .what .fmt{font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--slate);margin-top:4px}
 .slot .what .disc{font-size:.92rem;color:var(--slate);font-style:italic;margin-top:6px;line-height:1.55}
-@media(max-width:640px){.slot{grid-template-columns:1fr}.slot .time{border-right:none;border-bottom:1px dashed var(--line);padding-bottom:8px}}
+.poster-slot{grid-template-columns:64px 1fr}
+@media(max-width:640px){.slot{grid-template-columns:1fr}.poster-slot{grid-template-columns:52px 1fr}.poster-slot .time{border-right:1px solid var(--line);border-bottom:none;padding-bottom:15px}.slot .time{border-right:none;border-bottom:1px dashed var(--line);padding-bottom:8px}}
 
 /* ---------- Tables ---------- */
 table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:14px 0 20px}
@@ -422,11 +423,30 @@ footer{background:var(--navy);color:#B9C6D4;margin-top:20px}
 
 <!-- ================= POSTERS ================= -->
 <section id="posters" class="panel" role="tabpanel">
-  <div class="kicker">Poster Submission</div>
+  <div class="kicker">Posters</div>
   <h2>Call for student posters</h2>
   <p class="lede">Students and postdoctoral researchers are invited to present posters during the poster session, reception, and career fair, <strong>4:00 – 5:30 PM on September 24</strong>, in the IOE Building (North Campus).</p>
   <p>Posters may address any workshop topic: in-space computing architectures and hardware; in-space manufacturing, assembly, and deployment; launch logistics and earth-to-orbit supply chains; AI and data workloads for orbital platforms; resilience, security, and fault tolerance; autonomous systems and human-robot teaming; business models and economic viability; regulatory and policy issues; and environmental, energy, and sustainability dimensions of data centers on Earth and in space.</p>
 
+
+  <h3>Accepted posters</h3>
+  <p>Eleven posters will be presented at the session on Thursday, September 24, 4:00 – 5:30 PM, in the IOE Building.</p>
+  <div class="block-label">Poster Session · IOE Building · 4:00 – 5:30 PM</div>
+  <div class="sched">
+    <div class="slot poster-slot"><div class="time">#1</div><div class="what"><div class="title">Laser directed energy deposition additive manufacturing of lunar highland regolith simulant</div><div class="who"><b>Sizhe Xu</b> · The Ohio State University</div></div></div>
+    <div class="slot poster-slot"><div class="time">#2</div><div class="what"><div class="title">Modeling Auroral Particle Precipitation for Space Weather Impacts</div><div class="who"><b>Ari Gottesman</b> · University of Michigan</div></div></div>
+    <div class="slot poster-slot"><div class="time">#3</div><div class="what"><div class="title">Auroral Oval Model Validation using DMSP SSUSI and SSJ Instruments</div><div class="who"><b>Michelle X. Bui</b> · University of Michigan</div></div></div>
+    <div class="slot poster-slot"><div class="time">#4</div><div class="what"><div class="title">Wide Bandgap Integrated Photonics for Space Data Centers</div><div class="who"><b>Jeffrey Hung</b> · University of Michigan</div></div></div>
+    <div class="slot poster-slot"><div class="time">#5</div><div class="what"><div class="title">Launch Control Strategies to Avoid Bistability in Low Earth Orbit Utilization</div><div class="who"><b>Aditya S. Gopalan</b> · Purdue University</div></div></div>
+    <div class="slot poster-slot"><div class="time">#6</div><div class="what"><div class="title">C-band 110-GHz-Bandwidth Thin-Film Lithium Tantalate Modulator Enabling 768 (536) Gbit/s Line (Net) Data Rates</div><div class="who"><b>Yang Lan</b> · University of Michigan</div></div></div>
+    <div class="slot poster-slot"><div class="time">#7</div><div class="what"><div class="title">Modeling the Water-Energy Tradeoffs of Data Centers</div><div class="who"><b>Garrett Alston</b> · University of Michigan</div></div></div>
+    <div class="slot poster-slot"><div class="time">#8</div><div class="what"><div class="title">Contextual ER-SAA for Space Launch Network Planning</div><div class="who"><b>Yiran Chen</b> · University of Michigan</div></div></div>
+    <div class="slot poster-slot"><div class="time">#9</div><div class="what"><div class="title">Orbital vs. Terrestrial Data Center Infrastructure: A Multi-Objective Optimization Approach</div><div class="who"><b>Edgar Venegas</b> · University of Michigan</div></div></div>
+    <div class="slot poster-slot"><div class="time">#10</div><div class="what"><div class="title">Marscrete: Enabling Sustainable Data Centers on Mars</div><div class="who"><b>Tapiwanashe Bhibho</b> · Northwestern University</div></div></div>
+    <div class="slot poster-slot"><div class="time">#11</div><div class="what"><div class="title">C-band 110-GHz-Bandwidth Thin-Film Lithium Tantalate Modulator</div><div class="who"><b>Jinze Shi</b> · University of Michigan</div></div></div>
+  </div>
+
+<!-- 
   <h3>Key dates</h3>
   <ul class="plain">
     <li>Poster abstract submission deadline: <strong>Monday, September 14, 2026</strong></li>
@@ -440,6 +460,7 @@ footer{background:var(--navy);color:#B9C6D4;margin-top:20px}
     <li>All poster presenters must also register for the workshop (registration is free)</li>
   </ul>
   <a class="btn gold" href="https://forms.gle/mLVGSmjcjTejYyUT7" target="_blank" rel="noopener">Submit a poster abstract</a>
+  -->
 </section>
 
 <!-- ================= COMMITTEE ================= -->
